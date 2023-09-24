@@ -1,0 +1,38 @@
+{% if session.username %}
+<p>Olet kirjautunut nimellä {{ session.username }}</p>
+<a href="/logout">Kirjaudu ulos</a>
+<p>Valitse ryhmä</p>
+<hr>
+{% for group in groups %}
+<a href="/{{ group.content }}">{{ group.content }}</a>
+<br>
+</hr>
+{% endfor %}
+<form action="newgroup" method="POST">
+    <p>Luo uusi ryhmä<br>
+        <input type="text" name="group">
+    </p>
+    <input type="submit" value="Luo ryhmä">
+</form>
+{% else %}
+<p>Jos sinulla on jo käyttäjätunnus, kirjaudu sisään.</p>
+<form action="/login" method="POST">
+    <p>Tunnus:<br>
+        <input type="text" name="username">
+    </p>
+    <p>Salasana:<br>
+        <input type="password" name="password">
+    </p>
+    <input type="submit" value="Kirjaudu">
+</form>
+<p><br>Jos sinulla ei ole vielä käyttäjätunnusta, luo uusi tunnus.</p>
+<form action="/createuser" method="POST">
+    <p>Tunnus:<br>
+        <input type="text" name="username">
+    </p>
+    <p>Salasana:<br>
+        <input type="password" name="password">
+    </p>
+    <input type="submit" value="Luo uusi käyttäjä">
+</form>
+{% endif %}
