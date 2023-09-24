@@ -1,18 +1,19 @@
 # Palautesovellus
 
-Sovelluksella voi antaa palautetta toisille ryhmän kesken.
+Sovelluksesta tulee palautesovellus, jolla voi antaa palautetta oman ryhmän jäsenille. Tällä hetkellä sovelluksessa voi luoda tunnuksen ja kirjautua sisään ja ulos, sekä luoda ryhmän. Ryhmien nimet näkyvät kirjautuneille käyttäjille linkkeinä etusivulla. Ryhmien nimiä klikkaamalla ei pääse tällä hetkellä vielä minnekään.
 
 ## Sovelluksen ominaisuuksia:
 Toteutetut ominaisuudet on merkitty listaan.
 - [x] Käyttäjä voi luoda itselleen tunnuksen.
 - [x] Käyttäjä voi kirjautua sisään ja ulos.
+- [x] Käyttäjä voi luoda uuden ryhmän.
 - [ ] Käyttäjä voi valita ryhmän, mihin kuuluu.
 - [ ] Käyttäjä näkee sovelluksen etusivulla listan muista käyttäjistä, jotka kuuluvat samaan ryhmään.
 - [ ] Käyttäjä voi kirjoittaa anonyymin viestin toiselle samaan ryhmään kuuluvalle käyttäjälle.
 - [ ] Käyttäjä voi poistaa lähettämänsä viestin.
 - [ ] Käyttäjä näkee listassa eri värillä ne henkilöt, joille hän on jo lähettänyt viestin.
 - [ ] Käyttäjä voi lukea itselleen tulleita viestejä.
-- [ ] Ylläpitäjä voi luoda uuden ryhmän.
+
 
 ## Käyttöohjeet
 
@@ -50,6 +51,14 @@ Määritä tietokannan skeema komennolla:
 
 ```
 psql < schema.sql
+```
+
+Sovellus käyttää tietokantatauluja nimeltä *users* ja *groups*. Jos sinulla on omassa tietokannassasi jo samannimisiä tauluja, voit seurata kurssimateriaalin ohjeita uuden tietokannan luomiseen vertaisarviointia varten.
+Vaihtoehtoisesti voit myös poistaa samannimiset taulut etukäteen omasta tietokannastasi psql-komennoilla:
+
+```
+DROP TABLE users;
+DROP TABLE groups;
 ```
 
 Käynnistä sovellus komennolla:
