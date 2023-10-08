@@ -46,10 +46,7 @@ Aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet komennoilla:
 ```
 python3 -m venv venv
 source venv/bin/activate
-pip install flask
-pip install flask-sqlalchemy
-pip install psycopg2
-pip install python-dotenv
+pip install -r requirements.txt
 ```
 
 Määritä tietokannan skeema komennolla:
