@@ -5,21 +5,22 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 
 def login(username, password):
-    sql = f"SELECT id, password FROM users WHERE username='{username}'"
+    sql = f"SELECT id, username, password FROM users WHERE username='{username}'"
     result = db.session.execute(text(sql))
     user = result.fetchone()
     if not user:
         return False
     else:
         if check_password_hash(user.password, password):
-            session["username"] = username
+            session["user_id"] = user.id
+            session["username"] = user.username
             return True
         else:
             return False
 
 
 def logout():
-    del session["username"]
+    del session["user_id"]
 
 
 def create_user(username, password):
@@ -31,3 +32,11 @@ def create_user(username, password):
     except:
         return False
     return login(username, password)
+
+
+def get_id():
+    return session.get("user_id", 0)
+
+
+def get_username():
+    return session.get("username", None)

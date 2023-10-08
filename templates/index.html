@@ -1,18 +1,19 @@
-{% if session.username %}
-<p>Olet kirjautunut nimellä {{ session.username }}</p>
-<a href="/logout">Kirjaudu ulos</a>
-<p>Valitse ryhmä</p>
+{% if session.user_id %}
+<p>Olet kirjautunut nimellä {{ username }}</p>
+<a href="/logout">Kirjaudu ulos</a></br>
+<a href="/my_projects">Omat projektit</a></br>
+<p>Valitse projekti</p>
 <hr>
-{% for group in groups %}
-<a href="/{{ group.content }}">{{ group.content }}</a>
+{% for project in projects %}
+<a href="/project/{{ project.id }}">{{ project.project_name }}</a>
 <br>
 </hr>
 {% endfor %}
-<form action="newgroup" method="POST">
-    <p>Luo uusi ryhmä<br>
-        <input type="text" name="group">
+<form action="newproject" method="POST">
+    <p>Luo uusi projekti<br>
+        <input type="text" name="project">
     </p>
-    <input type="submit" value="Luo ryhmä">
+    <input type="submit" value="Luo projekti">
 </form>
 {% else %}
 <p>Jos sinulla on jo käyttäjätunnus, kirjaudu sisään.</p>

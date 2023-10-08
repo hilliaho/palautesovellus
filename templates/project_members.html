@@ -1,0 +1,9 @@
+Projekti {{ project.project_name }}</br></br>
+Projektin jäsenet:</br></br>
+{% for member in project_members %}
+{{ member.user_name }}:
+{{ member.user_role }} <br>
+{% endfor %}
+</br>
+</br>
+<a href="/">Etusivulle</a>
