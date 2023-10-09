@@ -1,5 +1,10 @@
+<h2>Omat projektit</h2>
+{% for project in user_projects %}
+{{ project.project_name }} <br>
+{% endfor %}
+<br>
+<h2>Lisää projekti</h2>
 <form action="/my_projects" method="POST">
-    Lisää projekti
     Projektin nimi:
     <select name="project_id">
         {% for project in all_projects %}
@@ -10,10 +15,7 @@
     Rooli: <input type="text" name="user_role">
     <input type="submit" value="Lähetä">
 </form>
-Omat projektit: </br>
-{% for project in user_projects %}
-{{ project.project_name }} </br>
-{% endfor %}
-</br>
-</br>
+
+<br>
+<br>
 <a href="/">Etusivulle</a>
