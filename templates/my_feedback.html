@@ -1,0 +1,11 @@
+<h1>Palautetta sinulle:</h1>
+{% if session.user_id %}
+{% for feedback_message in feedback_messages %}
+{{feedback_message[0]}}</br>
+{% endfor %}
+</br>
+</br>
+<a href="/">Etusivulle</a>
+{% else %}
+<a href="/">Kirjaudu sisään</a> nähdäksesi omat palautteesi.
+{% endif %}
