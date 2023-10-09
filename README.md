@@ -1,6 +1,6 @@
 # Palautesovellus
 
-Sovelluksesta tulee palautesovellus, jolla voi antaa palautetta projektin jäsenille. 
+Sovellus on palautesovellus, jolla voi antaa palautetta projektin jäsenille. 
 
 Edellisen vertaisarviointikierroksen jälkeen sovellukseen on lisätty ominaisuudet:
 - [x] Käyttäjä voi lisätä nimensä ja roolinsa projektin osallistujalistaan.
