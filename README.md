@@ -5,6 +5,8 @@ Sovelluksesta tulee palautesovellus, jolla voi antaa palautetta projektin jäsen
 Edellisen vertaisarviointikierroksen jälkeen sovellukseen on lisätty ominaisuudet:
 - [x] Käyttäjä voi lisätä nimensä ja roolinsa projektin osallistujalistaan.
 - [x] Käyttäjä näkee projektin sivulla listan projektin osallistujista.
+- [x] Käyttäjä voi kirjoittaa anonyymin viestin toiselle samaan projektiin kuuluvalle käyttäjälle.
+- [x] Käyttäjä voi lukea itselleen tulleita viestejä.
 
 ## Sovelluksen ominaisuuksia:
 Toteutetut ominaisuudet on merkitty listaan.
@@ -14,10 +16,11 @@ Toteutetut ominaisuudet on merkitty listaan.
 - [x] Käyttäjä voi luoda uuden projektin.
 - [x] Käyttäjä voi lisätä nimensä ja roolinsa projektin osallistujalistaan.
 - [x] Käyttäjä näkee projektin sivulla listan projektin osallistujista.
-- [ ] Käyttäjä voi kirjoittaa anonyymin viestin toiselle samaan projektiin kuuluvalle käyttäjälle.
+- [x] Käyttäjä voi kirjoittaa anonyymin viestin toiselle samaan projektiin kuuluvalle käyttäjälle.
+- [x] Käyttäjä voi lukea itselleen tulleita viestejä.
 - [ ] Käyttäjä voi poistaa lähettämänsä viestin.
 - [ ] Käyttäjä näkee listassa eri värillä ne henkilöt, joille hän on jo lähettänyt viestin.
-- [ ] Käyttäjä voi lukea itselleen tulleita viestejä.
+
 
 
 ## Käyttöohjeet
