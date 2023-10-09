@@ -10,11 +10,13 @@ CREATE TABLE projects (
 CREATE TABLE feedback_messages (
     id SERIAL PRIMARY KEY,
     content TEXT,
+    project_id INTEGER REFERENCES projects,
     receiver_id INTEGER REFERENCES users
 );
 CREATE TABLE project_members (
-    user_id INTEGER,
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users,
     user_name TEXT,
     user_role TEXT,
-    project_id INTEGER
+    project_id INTEGER REFERENCES projects
 );

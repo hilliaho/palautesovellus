@@ -1,12 +1,12 @@
 from app import app
 from flask import render_template, request, redirect
-import projects, users, feedback_messages, project_members, user_projects
+import projects, users, feedback_messages, project_members, feedback_messages
 
 
 @app.route("/")
 def index():
     list = projects.get_projects()
-    name = users.get_username()
+    name = users.get_session_username()
     return render_template("index.html", projects=list, username=name)
 
 
@@ -36,7 +36,7 @@ def login():
             return redirect("/")
         else:
             return render_template(
-                "error_message.html", message="Kirjautuminen ei onnistunut."
+                "error_message.html", error_message="Kirjautuminen ei onnistunut."
             )
 
 
@@ -55,23 +55,23 @@ def new_project():
 
 @app.route("/my_feedback", methods=["GET"])
 def my_feedback():
-    list = feedback_messages.get_feedback_messages(users.get_id)
+    list = feedback_messages.get_feedback_messages(users.get_id())
     return render_template("my_feedback.html", feedback_messages=list)
 
 
-@app.route("/project/<int:id>", methods=["GET", "POST"])
-def project(id):
+@app.route("/project/<int:project_id>", methods=["GET", "POST"])
+def project(project_id):
     if request.method == "GET":
-        list = project_members.get_project_members(id)
-        project = projects.get_project(id)
+        list = project_members.get_project_members(project_id)
+        project = projects.get_project(project_id)
         return render_template(
             "project_members.html", project_members=list, project=project
         )
     if request.method == "POST":
-        user_id = users.get_id()
-        name = request.form["name"]
-        project_members.add_project_member(user_id, id, name)
-        address = f"/project/{id}"
+        receiver_id = request.form["receiver_id"]
+        feedback_message_content = request.form["feedback_content"]
+        feedback_messages.send(feedback_message_content, receiver_id, project_id)
+        address = f"/project/{project_id}"
         return redirect(address)
 
 

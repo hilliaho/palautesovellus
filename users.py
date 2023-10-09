@@ -38,5 +38,11 @@ def get_id():
     return session.get("user_id", 0)
 
 
-def get_username():
+def get_session_username():
     return session.get("username", None)
+
+
+def get_user(id):
+    sql = f"SELECT * FROM users WHERE id={id}"
+    result = db.session.execute(text(sql))
+    return result.fetchone()

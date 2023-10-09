@@ -1,9 +1,15 @@
-Projekti {{ project.project_name }}</br></br>
+<h1>{{ project.project_name }}</h1></br></br>
 Projektin jäsenet:</br></br>
-{% for member in project_members %}
-{{ member.user_name }}:
-{{ member.user_role }} <br>
-{% endfor %}
+
+<form action="/project/{{ project.id }}" method="POST">
+    <select name="receiver_id">
+        {% for member in project_members %}
+        <option value="{{ member.user_id }}">{{ member.user_name }} ({{ member.user_role }})</option>
+        {% endfor %}
+    </select>
+    Viesti: <textarea name="feedback_content" rows="3" cols="40"></textarea>
+    <input type="submit" value="Lähetä">
+</form>
 </br>
 </br>
 <a href="/">Etusivulle</a>

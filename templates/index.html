@@ -1,7 +1,10 @@
+<h1>Palautesovellus</h1>
+</br>
 {% if session.user_id %}
 <p>Olet kirjautunut nimellä {{ username }}</p>
 <a href="/logout">Kirjaudu ulos</a></br>
 <a href="/my_projects">Omat projektit</a></br>
+<a href="/my_feedback">Omat palautteesi</a></br>
 <p>Valitse projekti</p>
 <hr>
 {% for project in projects %}
@@ -15,6 +18,7 @@
     </p>
     <input type="submit" value="Luo projekti">
 </form>
+</br>
 {% else %}
 <p>Jos sinulla on jo käyttäjätunnus, kirjaudu sisään.</p>
 <form action="/login" method="POST">

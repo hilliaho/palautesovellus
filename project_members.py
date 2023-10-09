@@ -8,11 +8,10 @@ def get_project_members(project_id):
     return result.fetchall()
 
 
-def add_project_member(user_id, project_id, name):
-    sql = f"INSERT INTO project_members VALUES ('{user_id}','{project_id}','{name}')"
-    db.session.execute(text(sql))
-    db.session.commit()
-    return
+def get_project_member(project_id, user_id):
+    sql = f"SELECT * FROM project_members WHERE project_id='{project_id}' user_id='{user_id}'"
+    result = db.session.execute(text(sql))
+    return result.fetchone()
 
 
 def get_user_projects(user_id):
@@ -29,7 +28,7 @@ def get_user_projects(user_id):
 
 
 def add_user_project(user_id, user_name, user_role, project_id):
-    sql = f"INSERT INTO project_members VALUES ('{user_id}','{user_name}','{user_role}','{project_id}')"
+    sql = f"INSERT INTO project_members VALUES ({user_id},'{user_name}','{user_role}',{project_id})"
     db.session.execute(text(sql))
     db.session.commit()
     return
