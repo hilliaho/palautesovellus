@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, request, redirect
-import projects, users, feedback_messages, project_members, feedback_messages
+import projects, users, feedback_messages, project_members, feedback_messages, input_validation
 
 
 @app.route("/")
@@ -10,18 +10,33 @@ def index():
     return render_template("index.html", projects=list, username=name)
 
 
-@app.route("/createuser", methods=["POST"])
+@app.route("/register", methods=["POST", "GET"])
 def create_user():
     if request.method == "GET":
         return render_template("register.html")
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        if users.create_user(username, password):
+        password_validation_result = input_validation.validate(
+            "password", password, 8, 50
+        )
+        username_validation_result = input_validation.validate(
+            "username", username, 2, 30
+        )
+        if username_validation_result != True:
+            return render_template(
+                "error_message.html", error_message=username_validation_result[1]
+            )
+        elif password_validation_result != True:
+            return render_template(
+                "error_message.html", error_message=password_validation_result[1]
+            )
+        elif users.create_user(username, password):
             return redirect("/")
         else:
             return render_template(
-                "error_message.html", message="Uuden käyttäjän luominen ei onnistunut."
+                "error_message.html",
+                message="Uuden käyttäjän luominen ei onnistunut.",
             )
 
 
@@ -49,6 +64,13 @@ def logout():
 @app.route("/newproject", methods=["POST"])
 def new_project():
     project_name = request.form["project"]
+    project_name_validation_result = input_validation.validate(
+        "project_name", project_name, 1, 30
+    )
+    if project_name_validation_result != True:
+        return render_template(
+            "error_message.html", error_message=project_name_validation_result[1]
+        )
     projects.new_project(project_name)
     return redirect("/")
 
@@ -70,6 +92,13 @@ def project(project_id):
     if request.method == "POST":
         receiver_id = request.form["receiver_id"]
         feedback_message_content = request.form["feedback_content"]
+        message_validation_result = input_validation.validate(
+            "message", feedback_message_content, 1, 5000
+        )
+        if message_validation_result != True:
+            return render_template(
+                "error_message.html", error_message=message_validation_result[1]
+            )
         feedback_messages.send(feedback_message_content, receiver_id, project_id)
         address = f"/project/{project_id}"
         return redirect(address)
@@ -88,11 +117,21 @@ def user_projects():
         project_id = request.form["project_id"]
         user_name = request.form["user_name"]
         user_role = request.form["user_role"]
+        name_validation_result = input_validation.validate("name", user_name, 1, 30)
+        if name_validation_result != True:
+            return render_template(
+                "error_message.html", error_message=name_validation_result[1]
+            )
+        role_validation_result = input_validation.validate("role", user_role, 0, 30)
+        if role_validation_result != True:
+            return render_template(
+                "error_message.html", error_message=role_validation_result[1]
+            )
         user_id = users.get_id()
         project_members.add_user_project(
-            user_id=user_id,
-            user_name=user_name,
-            user_role=user_role,
+            id=user_id,
+            name=user_name,
+            role=user_role,
             project_id=project_id,
         )
         return redirect("my_projects")

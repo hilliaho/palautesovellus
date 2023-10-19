@@ -20,24 +20,7 @@
 </form>
 <br>
 {% else %}
-<p>Jos sinulla on jo käyttäjätunnus, kirjaudu sisään.</p>
-<form action="/login" method="POST">
-    <p>Tunnus:<br>
-        <input type="text" name="username">
-    </p>
-    <p>Salasana:<br>
-        <input type="password" name="password">
-    </p>
-    <input type="submit" value="Kirjaudu">
-</form>
-<p><br>Jos sinulla ei ole vielä käyttäjätunnusta, luo uusi tunnus.</p>
-<form action="/createuser" method="POST">
-    <p>Tunnus:<br>
-        <input type="text" name="username">
-    </p>
-    <p>Salasana:<br>
-        <input type="password" name="password">
-    </p>
-    <input type="submit" value="Luo uusi käyttäjä">
-</form>
+<a href="/login">Kirjaudu sisään</a>
+<br>
+<a href="/register">Rekisteröidy</a>
 {% endif %}
