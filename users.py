@@ -5,8 +5,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 
 def login(username, password):
-    sql = f"SELECT id, username, password FROM users WHERE username='{username}'"
-    result = db.session.execute(text(sql))
+    sql = text("SELECT id, username, password FROM users WHERE username=:username")
+    result = db.session.execute(sql, {"username": username})
     user = result.fetchone()
     if not user:
         return False
@@ -26,8 +26,10 @@ def logout():
 def create_user(username, password):
     try:
         hash_value = generate_password_hash(password)
-        sql = f"INSERT INTO users (username, password) VALUES ('{username}', '{hash_value}')"
-        db.session.execute(text(sql))
+        sql = text(
+            "INSERT INTO users (username, password) VALUES (:username, :password)"
+        )
+        db.session.execute(sql, {"username": username, "password": hash_value})
         db.session.commit()
     except:
         return False
@@ -43,6 +45,6 @@ def get_session_username():
 
 
 def get_user(id):
-    sql = f"SELECT * FROM users WHERE id={id}"
-    result = db.session.execute(text(sql))
+    sql = text("SELECT * FROM users WHERE id=:id")
+    result = db.session.execute(sql, {"id": id})
     return result.fetchone()
