@@ -16,6 +16,24 @@
     <input type="submit" value="Lähetä">
 </form>
 
+<script>
+    function check(form) {
+        if (form.user_name.value.length > 30) {
+            alert("Nimi on liian pitkä");
+            return false;
+        }
+        if (form.user_name.value.length < 1) {
+            alert("Nimi on liian lyhyt");
+            return false;
+        }
+        if (form.user_role.value.length > 30) {
+            alert("Rooli on liian pitkä");
+            return false;
+        }
+        return true;
+    }
+</script>
+
 <br>
 <br>
 <a href="/">Etusivulle</a>
