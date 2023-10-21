@@ -3,35 +3,28 @@ from sqlalchemy.sql import text
 
 
 def get_project_members(project_id):
-    sql = text("SELECT * FROM project_members WHERE project_id=:project_id")
+    sql = text(
+        "SELECT user_id, user_name, user_role FROM project_members WHERE project_id=:project_id"
+    )
     result = db.session.execute(sql, {"project_id": project_id})
+    print(result)
     return result.fetchall()
 
 
-def get_project_member(project_id, user_id):
-    sql = text(
-        "SELECT * FROM project_members WHERE project_id=:project_id, user_id=:user_id"
-    )
-    result = db.session.execute(sql, {"project_id": project_id, "user_id": user_id})
-    return result.fetchone()
-
-
 def get_user_projects(user_id):
-    sql = text("SELECT * FROM project_members WHERE user_id=:user_id")
+    sql = text(
+        "SELECT projects.project_name FROM project_members, projects WHERE projects.id=project_members.project_id AND user_id=4"
+    )
     result = db.session.execute(sql, {"user_id": user_id})
-    project_list = result.fetchall()
-    projects = []
-    for project in project_list:
-        id = project.project_id
-        sql = text("SELECT * FROM projects WHERE id=:id")
-        result = db.session.execute(sql, {"id": id})
-        projects.append(result.fetchone())
-    return projects
+    project_names = result.fetchall()
+    return project_names
 
 
 def add_user_project(id, name, role, project_id):
     project_id = int(project_id)
-    sql = text("INSERT INTO project_members VALUES (:id, :name, :role, :project_id)")
+    sql = text(
+        "INSERT INTO project_members (user_id, user_name, user_role, project_id) VALUES (:id, :name, :role, :project_id)"
+    )
     db.session.execute(
         sql, {"id": id, "name": name, "role": role, "project_id": project_id}
     )

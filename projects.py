@@ -3,12 +3,12 @@ from sqlalchemy.sql import text
 
 
 def get_projects():
-    result = db.session.execute(text("SELECT * FROM projects"))
+    result = db.session.execute(text("SELECT id, project_name FROM projects"))
     return result.fetchall()
 
 
-def get_project(id):
-    sql = f"SELECT * FROM projects WHERE id={id}"
+def get_project_name(id):
+    sql = f"SELECT project_name FROM projects WHERE id={id}"
     result = db.session.execute(text(sql))
     return result.fetchone()
 

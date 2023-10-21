@@ -87,7 +87,7 @@ def my_feedback():
 def project(project_id):
     if request.method == "GET":
         list = project_members.get_project_members(project_id)
-        project = projects.get_project(project_id)
+        project = projects.get_project_name(project_id)
         return render_template(
             "project_members.html", project_members=list, project=project
         )

@@ -47,6 +47,6 @@ def get_session_username():
 
 
 def get_user(id):
-    sql = text("SELECT * FROM users WHERE id=:id")
+    sql = text("SELECT username FROM users WHERE id=:id")
     result = db.session.execute(sql, {"id": id})
     return result.fetchone()
