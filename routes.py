@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 import projects, users, feedback_messages, project_members, feedback_messages, input_validation
 
 
@@ -63,6 +63,8 @@ def logout():
 
 @app.route("/newproject", methods=["POST"])
 def new_project():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error_message.html", error_message="Pääsy kielletty")
     project_name = request.form["project"]
     project_name_validation_result = input_validation.validate(
         "project_name", project_name, 1, 30
@@ -90,6 +92,10 @@ def project(project_id):
             "project_members.html", project_members=list, project=project
         )
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            return render_template(
+                "error_message.html", error_message="Pääsy kielletty"
+            )
         receiver_id = request.form["receiver_id"]
         feedback_message_content = request.form["feedback_content"]
         message_validation_result = input_validation.validate(
@@ -114,6 +120,10 @@ def user_projects():
             "user_projects.html", user_projects=user_projects, all_projects=all_projects
         )
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            return render_template(
+                "error_message.html", error_message="Pääsy kielletty"
+            )
         project_id = request.form["project_id"]
         user_name = request.form["user_name"]
         user_role = request.form["user_role"]
