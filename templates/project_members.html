@@ -1,7 +1,7 @@
 <h1>{{ project.project_name }}</h1><br>
 <h2>Lähetä palautetta:</h2>
 
-<form action="/project/{{ project.id }}" method="POST" , onsubmit="check(this)">
+<form action="/project/{{ project_id }}" method="POST" , onsubmit="check(this)">
     <select name="receiver_id">
         {% for member in project_members %}
         <option value="{{ member.user_id }}">{{ member.user_name }} ({{ member.user_role }})</option>

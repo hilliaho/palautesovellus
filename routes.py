@@ -89,7 +89,10 @@ def project(project_id):
         list = project_members.get_project_members(project_id)
         project = projects.get_project_name(project_id)
         return render_template(
-            "project_members.html", project_members=list, project=project
+            "project_members.html",
+            project_members=list,
+            project=project,
+            project_id=project_id,
         )
     if request.method == "POST":
         if session["csrf_token"] != request.form["csrf_token"]:
