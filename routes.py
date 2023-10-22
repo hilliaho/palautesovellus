@@ -36,7 +36,7 @@ def create_user():
         else:
             return render_template(
                 "error_message.html",
-                message="Uuden käyttäjän luominen ei onnistunut.",
+                error_message="Käyttäjätunnus on jo käytössä.",
             )
 
 
@@ -51,7 +51,7 @@ def login():
             return redirect("/")
         else:
             return render_template(
-                "error_message.html", error_message="Kirjautuminen ei onnistunut."
+                "error_message.html", error_message="Väärä käyttäjätunnus tai salasana."
             )
 
 
