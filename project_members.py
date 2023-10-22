@@ -13,7 +13,7 @@ def get_project_members(project_id):
 
 def get_user_projects(user_id):
     sql = text(
-        "SELECT projects.project_name FROM project_members, projects WHERE projects.id=project_members.project_id AND user_id=_user_id"
+        "SELECT P.project_name FROM project_members M, projects P WHERE P.id=M.project_id AND M.user_id=:user_id"
     )
     result = db.session.execute(sql, {"user_id": user_id})
     project_names = result.fetchall()
