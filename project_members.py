@@ -30,3 +30,14 @@ def add_user_project(id, name, role, project_id):
     )
     db.session.commit()
     return
+
+
+def is_user_in_project(user_id, project_id):
+    sql = text(
+        "SELECT project_id FROM Project_members WHERE user_id=:user_id AND project_id=:project_id"
+    )
+    result = db.session.execute(sql, {"user_id": user_id, "project_id": project_id})
+    projects = result.fetchall()
+    if projects:
+        return True
+    return False

@@ -141,10 +141,16 @@ def user_projects():
                 "error_message.html", error_message=role_validation_result[1]
             )
         user_id = users.get_id()
-        project_members.add_user_project(
-            id=user_id,
-            name=user_name,
-            role=user_role,
-            project_id=project_id,
-        )
+        if not project_members.is_user_in_project(user_id, project_id):
+            project_members.add_user_project(
+                id=user_id,
+                name=user_name,
+                role=user_role,
+                project_id=project_id,
+            )
+        else:
+            return render_template(
+                "error_message.html",
+                error_message="Et voi liittyä samaan projektiin kuin kerran.",
+            )
         return redirect("my_projects")
